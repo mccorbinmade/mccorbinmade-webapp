@@ -1,0 +1,14 @@
+# Ignore the file with the token
+tokens.txt
+
+# Ignore xc project files
+*.pbxproj
+*.xcworkspacedata
+*.xcuserstate
+*.xcuserdatad/
+*.xcworkspace/
+project.pbxproj
+
+# Ignore macOS system files
+.DS_Store
+
