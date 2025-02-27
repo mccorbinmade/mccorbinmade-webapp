@@ -1,9 +1,28 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Image Background</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            height: 100vh;-->
+<!--            background: url('homepage-ext2.png') no-repeat center center fixed;-->
+<!--            background-size: cover; /* Ensures the image covers the whole page */-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Background</title>
+    <title>Image Background with Expanding Button</title>
     <style>
         body {
             margin: 0;
@@ -11,9 +30,39 @@
             height: 100vh;
             background: url('homepage-ext2.png') no-repeat center center fixed;
             background-size: cover; /* Ensures the image covers the whole page */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .image-button {
+            width: 25px;
+            height: 40px;
+            background: url('flame.png') no-repeat center center;
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+            transition: height 0.3s ease-in-out;
+            display: block;
+        }
+
+        .image-button:hover {
+            height: 80px; /* Expands from bottom up */
         }
     </style>
 </head>
 <body>
+
+    <div class="button-container">
+        <button class="image-button"></button>
+    </div>
+
 </body>
 </html>
