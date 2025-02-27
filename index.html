@@ -5,16 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Background</title>
     <style>
-        body {
+        html, body {
             margin: 0;
             padding: 0;
             height: 100%;
-            background: url('your-image.jpg') no-repeat center center fixed;
-            background-size: contain; /* Ensures the full image is visible and resizes with the screen */
-            background-color: #000; /* Adds a background color if there's empty space */
+            background-color: #333; /* Fills empty space with a background color */
+        }
+
+        body {
+            background: url('homepage-background.jpg') no-repeat center top;
+            background-size: 100% auto; /* Ensures image scales horizontally to fill the width */
+            background-attachment: fixed; /* Keeps the image fixed when scrolling */
+            max-width: 1200px; /* Sets a reasonable max width for the image */
+            margin: 0 auto; /* Centers the image horizontally if the screen is wider than the max-width */
+        }
+
+        /* Optional: Content area to demonstrate scrolling */
+        .content {
+            height: 2000px; /* Simulate scrollable content */
+            background-color: rgba(255, 255, 255, 0.7); /* Optional content background */
+            padding: 20px;
         }
     </style>
 </head>
 <body>
+    <div class="content">
+        <h1>This is your content area</h1>
+        <p>Scroll down to see the full image as you go.</p>
+    </div>
 </body>
 </html>
