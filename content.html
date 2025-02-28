@@ -2,70 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Screen with Buttons</title>
     <style>
         body {
             margin: 0;
             height: 100vh;
-            background-color: #faa51a; /* Your background color */
+            background-color: #faa51a;
             display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0; /* Start with body hidden */
-            transition: opacity 1s ease-in; /* Apply fade-in effect to the entire body */
-            position: relative;
-            flex-direction: column; /* Stack the buttons vertically */
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            flex-direction: column;
             text-align: center;
         }
 
-        /* Container for the buttons */
+        /* Button container (always keeps buttons in a row) */
         .image-button-container {
             display: flex;
-            justify-content: center; /* Center buttons horizontally */
-            align-items: center; /* Center buttons vertically */
-            gap: 20px; /* Space between buttons */
-            height: 100px; /* Adjust this value to change the container's height */
-            width: 100%; /* Make the container full width */
+            justify-content: center;
+            align-items: center;
+            gap: min(4vw, 20px); /* Space between buttons */
+            width: 100%;
             position: absolute;
-            top: 0; /* Align container to the top */
-            padding: 20px 0; /* Add some space at the top */
+            top: min(4vh, 20px);
+            padding: 10px 0;
+            flex-wrap: nowrap; /* Prevents buttons from stacking */
         }
 
-        /* Style for image buttons */
+        /* Style for image buttons (responsive but never too small) */
         .image-button {
-            width: 300px; /* Set width of buttons */
-            height: 70px; /* Set height of buttons */
-            background-size: contain; /* Ensure image is scaled to fit */
+            width: clamp(150px, 20vw, 300px); /* Min: 150px, Max: 300px, Proportional */
+            height: clamp(35px, 5vw, 70px);  /* Min: 35px, Max: 70px, Proportional */
+            background-size: contain;
             background-repeat: no-repeat;
-            border: none; /* Remove button borders */
+            border: none;
             cursor: pointer;
-            transition: filter 0.3s ease; /* Smooth transition for color inversion */
-            display: inline-block;
+            transition: filter 0.3s ease;
+            flex-shrink: 0; /* Prevents buttons from shrinking too much */
         }
 
-        /* Placeholder test images */
+        /* Button images */
         .button1 { background: url('content-images/beats-button.png') center center / cover; }
         .button2 { background: url('content-images/acoustics-button.png') center center / cover; }
         .button3 { background: url('content-images/remix-button.png') center center / cover; }
 
         /* Back button styling */
         .image-button-back {
-            width: 50px;
-            height: 50px;
+            width: clamp(40px, 6vw, 50px);
+            height: clamp(40px, 6vw, 50px);
             background: url('content-images/back-button.png') no-repeat center center;
             background-size: contain;
             border: none;
             cursor: pointer;
             position: absolute;
-            left: 20px;
-            bottom: 20px;
+            left: min(4vw, 20px);
+            bottom: min(4vh, 20px);
         }
+
     </style>
 </head>
 <body>
 
-    <!-- Container for buttons at the top -->
+    <!-- Container for buttons (always in a row) -->
     <div class="image-button-container">
         <button class="image-button button1" onclick="invertColor(this)"></button>
         <button class="image-button button2" onclick="invertColor(this)"></button>
@@ -80,19 +80,14 @@
     <script>
         // Fade in the entire body when the page loads
         window.onload = function() {
-            document.body.style.opacity = '1'; // Fade in the body content and background
+            document.body.style.opacity = '1';
         };
 
         // Function to invert the colors of the button when clicked
         function invertColor(button) {
-            // Get all buttons and reset their inversion state
             const buttons = document.querySelectorAll('.image-button');
-            buttons.forEach(btn => {
-                btn.style.filter = 'invert(0)'; // Reset inversion for all buttons
-            });
-
-            // Apply the inversion only to the clicked button
-            button.style.filter = 'invert(1)';
+            buttons.forEach(btn => btn.style.filter = 'invert(0)'); // Reset all buttons
+            button.style.filter = 'invert(1)'; // Apply inversion to the clicked button
         }
     </script>
 

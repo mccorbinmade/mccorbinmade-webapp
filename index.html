@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            background: url('homepage-images/homepage-ext-click-the-flame.png') no-repeat center center fixed;
+            background: url('homepage-images/homepage-16-9.png') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -18,13 +18,11 @@
 
         .button-container {
             position: relative;
-            bottom: 0.2rem;
-            left: -1rem;
         }
 
         .image-button {
-            width: 2vw; /* Scales with viewport width */
-            height: 4vh; /* Scales with viewport height */
+            width: min(3vw, 15px);
+            height: min(6vh, 32px);
             background: url('homepage-images/flame.png') no-repeat center center;
             background-size: contain;
             border: none;
@@ -39,19 +37,20 @@
             transform: scale(4);
         }
 
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
+        /* Mobile & Landscape Optimizations */
+        @media (max-width: 768px), (max-height: 500px) {
             .button-container {
-                left: -0.5rem; /* Adjust position slightly */
+                left: -0.8vw;
+                bottom: 0;
             }
 
             .image-button {
-                width: 5vw; /* Slightly larger button for touch usability */
-                height: 8vh;
+                width: min(4vw, 30px);
+                height: min(8vh, 50px);
             }
 
             .image-button:hover {
-                transform: scale(3.5); /* Reduce scale slightly for smaller screens */
+                transform: scale(3);
             }
         }
     </style>
@@ -66,58 +65,3 @@
 
 </body>
 </html>
-
-<!---->
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Image Background with Expanding Button</title>-->
-<!--    <style>-->
-<!--        body {-->
-<!--            margin: 0;-->
-<!--            padding: 0;-->
-<!--            height: 100vh;-->
-<!--            background: url('homepage-images/homepage-ext-click-the-flame.png') no-repeat center center fixed;-->
-<!--            background-size: cover; /* Ensures the image covers the whole page */-->
-<!--            display: flex;-->
-<!--            justify-content: center;-->
-<!--            align-items: center;-->
-<!--        }-->
-<!---->
-<!--        .button-container {-->
-<!--            position: relative;-->
-<!--            bottom: 2px;-->
-<!--            left: -15px;-->
-<!--        }-->
-<!---->
-<!--        .image-button {-->
-<!--            width: 16.5px;-->
-<!--            height: 26.4px;-->
-<!--            background: url('homepage-images/flame.png') no-repeat center center;-->
-<!--            background-size: cover;-->
-<!--            border: none;-->
-<!--            cursor: pointer;-->
-<!--            display: block;-->
-<!--            transform-origin: bottom center; /* Ensures expansion from the bottom */-->
-<!--            transform: scale(1); /* Normal size */-->
-<!--            transition: transform 0.3s ease-in-out;-->
-<!--        }-->
-<!---->
-<!--        .image-button:hover {-->
-<!--            transform: scale(4); /* Expands proportionally from the bottom up */-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!---->
-<!--    <div class="button-container">-->
-<!--        <a href="content.html">-->
-<!--            <button class="image-button"></button>-->
-<!--        </a>-->
-<!--    </div>-->
-<!---->
-<!--</body>-->
-<!--</html>-->
-<!---->
