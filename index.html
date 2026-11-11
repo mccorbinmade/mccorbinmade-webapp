@@ -1,67 +1,217 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Image Background with Expanding Button</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#01043a">
+    <title>McCorbinMADE</title>
     <style>
+        :root {
+            color-scheme: dark;
+            background: #01043a;
+            color: #fff1df;
+            font-family: "Courier Prime", "Courier New", monospace;
+        }
+
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: url('homepage-images/homepage-16-9.png') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .button-container {
             position: relative;
+            overflow: clip;
+            margin: 0;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .image-button {
-            width: min(3vw, 15px);
-            height: min(6vh, 32px);
-            background: url('homepage-images/flame.png') no-repeat center center;
-            background-size: contain;
-            border: none;
+        .site-header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            padding: clamp(1rem, 4vw, 2.5rem);
+        }
+
+        .site-header nav {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 1.25rem;
+        }
+
+        .nav-dropdown {
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-dropdown summary,
+        .nav-dropdown a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding-inline: .75rem;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-dropdown summary {
+            gap: .5rem;
             cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+        }
+
+        .nav-dropdown summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .nav-dropdown summary::after {
+            content: "";
+            width: .35em;
+            height: .35em;
+            border-right: 1px solid currentColor;
+            border-bottom: 1px solid currentColor;
+            transform: translateY(-.12em) rotate(45deg);
+        }
+
+        .nav-dropdown[open] summary::after {
+            transform: translateY(.12em) rotate(225deg);
+        }
+
+        .dropdown-panel {
+            position: absolute;
+            inset: calc(100% + .25rem) -.25rem auto;
+            min-height: 44px;
+            border-radius: .45rem;
+            background: #191e53;
+            font-size: .875rem;
+        }
+
+        .nav-dropdown summary:hover,
+        .nav-dropdown a:hover {
+            color: #83deff;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            @supports selector(details::details-content) and (transition-behavior: allow-discrete) {
+                .nav-dropdown::details-content {
+                    position: absolute;
+                    inset: calc(100% + .25rem) -.25rem auto;
+                    clip-path: inset(0 0 100% 0 round .45rem);
+                    transition: clip-path 240ms ease, content-visibility 240ms allow-discrete;
+                }
+
+                .nav-dropdown[open]::details-content {
+                    clip-path: inset(0 0 0 0 round .45rem);
+                }
+
+                .nav-dropdown .dropdown-panel {
+                    position: static;
+                }
+
+                .nav-dropdown summary::after {
+                    transition: transform 240ms ease;
+                }
+
+                .nav-dropdown:not([open]) a {
+                    pointer-events: none;
+                }
+
+                .nav-dropdown a:focus-visible {
+                    outline-offset: -4px;
+                }
+            }
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: grid;
+            justify-items: center;
+            align-content: center;
+            padding: 3.75rem clamp(1rem, 5vw, 4rem) clamp(4rem, 12vh, 8rem);
+        }
+
+        .featured-projects {
+            position: absolute;
+            inset: 0 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: .25rem 1.5rem;
+            padding-inline: 1rem;
+            font-size: clamp(.875rem, 2vw, 1.125rem);
+            text-align: center;
+        }
+
+        .featured-projects a {
+            padding: .5rem .65rem;
+            border-radius: .35rem;
+            background: #01043a;
+            color: inherit;
+            text-underline-offset: .25em;
+        }
+
+        .featured-projects .lore-link {
+            color: #ff65e5;
+            font-weight: 700;
+        }
+
+        .wordmark {
             display: block;
-            transform-origin: bottom center;
-            transform: scale(1);
-            transition: transform 0.3s ease-in-out;
+            width: min(100%, 65rem);
+            height: auto;
         }
 
-        .image-button:hover {
-            transform: scale(4);
+        .reaching-hand {
+            --hand-angle: 25deg;
+            position: absolute;
+            bottom: -7svh;
+            left: min(5vw, 5svh, 4rem);
+            height: 87svh;
+            width: auto;
+            transform-origin: 59% 98%;
+            transform: translateX(-59%) rotate(var(--hand-angle)) scaleX(-1);
+            pointer-events: none;
         }
 
-        /* Mobile & Landscape Optimizations */
-        @media (max-width: 768px), (max-height: 500px) {
-            .button-container {
-                left: -0.8vw;
-                bottom: 0;
-            }
+        @media (min-aspect-ratio: 3/4) {
+            .reaching-hand { --hand-angle: 38deg; }
+        }
 
-            .image-button {
-                width: min(4vw, 30px);
-                height: min(8vh, 50px);
-            }
+        @media (min-aspect-ratio: 4/3) {
+            .reaching-hand { height: 97svh; }
+        }
 
-            .image-button:hover {
-                transform: scale(3);
-            }
+        :focus-visible {
+            outline: 2px solid #83deff;
+            outline-offset: 4px;
         }
     </style>
 </head>
 <body>
+    <header class="site-header">
+        <nav aria-label="Main navigation">
+            <details class="nav-dropdown" name="homepage-menu">
+                <summary>Projects</summary>
+                <div class="dropdown-panel">
+                    <a href="https://lore.mccorbinmade.com/">LORE</a>
+                </div>
+            </details>
+            <details class="nav-dropdown" name="homepage-menu">
+                <summary>Events</summary>
+                <div class="dropdown-panel"></div>
+            </details>
+        </nav>
+    </header>
 
-    <div class="button-container">
-        <a href="content.html">
-            <button class="image-button"></button>
-        </a>
-    </div>
+    <img class="reaching-hand" src="homepage-images/reaching-hand.png" width="1055" height="1491" alt="">
 
+    <main>
+        <div class="featured-projects">
+            <a class="lore-link" href="https://lore.mccorbinmade.com/">LORE App</a>
+            <a href="mont33/">MONT33 (Coming soon)</a>
+        </div>
+        <img class="wordmark" src="homepage-images/mccorbinmade-logo.png" width="4544" height="1764" alt="McCorbinMADE">
+    </main>
 </body>
 </html>
